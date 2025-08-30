@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Backup Dashboard</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
+    </style>
+</head>
+<body>
+<h2>QUERY BACKUPS JOBS</h2>
+<form method="POST">
+    Client: <input type="text" name="client" value="{{ client }}">
+    Save Time: <input type="text" name="date-time" value="{{ savetime }}">
+    <button type = "submit"> Filter </button>
+</form>
+
+<h3>Results</h3>
+{% if data %}
+    <table>
+        <tr>
+            {% for key in data[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+            <tr>
+                {% for val in row.values() %}
+                    <td>{{ val }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+
+
+</body>
+</html>
